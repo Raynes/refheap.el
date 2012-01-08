@@ -1,5 +1,16 @@
+;;; refheap.el --- A library for pasting to https://refheap.com
+;;; Copyright 2012 Anthony Grimes
+;;; Author: Anthony Grimes
+;;; URL: https://github.com/Raynes/refheap.el
+;;; Version: 0.0.1
+
 (require 'json)
 (require 'url)
+
+(defgroup refheap nil
+  "A library for pasting to refheap.com"
+  :prefix "refheap-"
+  :group 'applications)
 
 (defvar refheap-supported-modes '((clojure-mode . "Clojure")
                                   ;(dontknow . "Factor")
@@ -59,10 +70,14 @@
                                   (xml-mode . "XML")))
 
 (defcustom refheap-user nil
-  "Your RefHeap username.")
+  "Your RefHeap username."
+  :type 'string
+  :group 'refheap)
 
 (defcustom refheap-token nil
-  "Your RefHeap API token.")
+  "Your RefHeap API token."
+  :type 'string
+  :group 'refheap)
 
 (defun read-url (status)
   (search-forward "\n\n")
@@ -85,24 +100,29 @@
                  (when (and refheap-user refheap-token) 
                    (concat "&username=" refheap-user "&"
                            "token=" (url-hexify-string refheap-token))))))
-    (url-retrieve "http://localhost:8080/api/paste" 'read-url)))
+    (url-retrieve "https://refheap.com/api/paste" 'read-url)))
 
+;;;###autoload
 (defun refheap-paste-region (begin end &optional private)
   (interactive "r\nP")
   (let ((hl (or (cdr (assoc major-mode refheap-supported-modes))
                 "Plain Text")))
     (refheap-paste (buffer-substring begin end) hl private)))
 
+;;;###autoload
 (defun refheap-paste-region-private (begin end)
   (interactive "r")
   (refheap-paste-region begin end t))
 
+;;;###autoload
 (defun refheap-paste-buffer (&optional private)
   (interactive "P")
   (refheap-paste-region (point-min) (point-max) private))
 
+;;;###autoload
 (defun refheap-paste-buffer-private ()
   (interactive)
   (refheap-paste-buffer t))
 
 (provide 'refheap)
+;;; refheap.el ends here
