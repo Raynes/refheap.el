@@ -13,7 +13,7 @@
   :group 'applications)
 
 (defvar refheap-supported-modes '((clojure-mode . "Clojure")
-                                  (diff-mode . "Diff)
+                                  (diff-mode . "Diff")
                                   (fancy-mode . "Fancy")
                                   (groovy-mode . "Groovy")
                                   (grails-mode . "Groovy")
