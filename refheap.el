@@ -100,7 +100,7 @@
                  (when (and refheap-user refheap-token) 
                    (concat "&username=" refheap-user "&"
                            "token=" (url-hexify-string refheap-token))))))
-    (url-retrieve "https://refheap.com/api/paste" 'read-url)))
+    (url-retrieve "https://www.refheap.com/api/paste" 'read-url)))
 
 ;;;###autoload
 (defun refheap-paste-region (begin end &optional private)
