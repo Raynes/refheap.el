@@ -12,8 +12,8 @@
   :prefix "refheap-"
   :group 'applications)
 
-(defvar refheap-supported-modes '((clojure-mode . "Clojure")
-                                  (nrepl-clojure-mode . "Clojure")
+(defvar refheap-supported-modes '((nrepl-clojure-mode . "Clojure")
+                                  (clojure-mode . "Clojure")
                                   (diff-mode . "Diff")
                                   (fancy-mode . "Fancy")
                                   (groovy-mode . "Groovy")
