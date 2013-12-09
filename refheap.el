@@ -82,7 +82,8 @@
   :type 'string
   :group 'refheap)
 
-(defun read-url (status)
+(defun read-refheap-url (status)
+  "Get the url from the refheap server response."
   (search-forward "\n\n")
   (let ((location (cdr (assoc 'url 
                        (json-read-from-string 
@@ -93,6 +94,7 @@
     (kill-buffer (current-buffer))))
 
 (defun refheap-paste (text mode private)
+  "Send text to the refheap server, with highlighting mode, optionally private."
   (let ((url-request-method "POST")
         (url-request-extra-headers
          '(("Content-Type" . "application/x-www-form-urlencoded")))
@@ -103,10 +105,11 @@
                  (when (and refheap-user refheap-token) 
                    (concat "&username=" refheap-user "&"
                            "token=" (url-hexify-string refheap-token))))))
-    (url-retrieve "https://www.refheap.com/api/paste" 'read-url)))
+    (url-retrieve "https://www.refheap.com/api/paste" 'read-refheap-url)))
 
 ;;;###autoload
 (defun refheap-paste-region (begin end &optional private)
+  "Paste the current region to refheap. With prefix arg, paste privately."
   (interactive "r\nP")
   (let ((hl (or (cdr (assoc major-mode refheap-supported-modes))
                 "Plain Text")))
@@ -114,16 +117,19 @@
 
 ;;;###autoload
 (defun refheap-paste-region-private (begin end)
+  "Paste the current region to a private refheap entry."
   (interactive "r")
   (refheap-paste-region begin end t))
 
 ;;;###autoload
 (defun refheap-paste-buffer (&optional private)
+  "Paste the current buffer to refheap. With prefix arg, paste privately."
   (interactive "P")
   (refheap-paste-region (point-min) (point-max) private))
 
 ;;;###autoload
 (defun refheap-paste-buffer-private ()
+  "Paste the current buffer to a private refheap entry."
   (interactive)
   (refheap-paste-buffer t))
 
