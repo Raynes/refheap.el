@@ -71,7 +71,7 @@
                                   (php-mode . "PHP")
                                   (text-mode . "Plain Text")
                                   (sass-mode . "SASS")
-                                  (xml-mode . "XML"))
+                                  (xml-mode . "XML")))
 
 (defcustom refheap-user nil
   "Your RefHeap username."
