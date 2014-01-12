@@ -2,7 +2,7 @@
 ;;; Copyright 2012 Anthony Grimes
 ;;; Author: Anthony Grimes
 ;;; URL: https://github.com/Raynes/refheap.el
-;;; Version: 0.0.3
+;;; Version: 0.0.4
 ;;; Package-Requires: ((json "1.2"))
 
 (require 'json)
@@ -14,6 +14,7 @@
   :group 'applications)
 
 (defvar refheap-supported-modes '((nrepl-clojure-mode . "Clojure")
+                                  (markdown-mode . "Markdown")
                                   (clojure-mode . "Clojure")
                                   (clojurescript-mode . "Clojure")
                                   (diff-mode . "Diff")
@@ -70,7 +71,7 @@
                                   (php-mode . "PHP")
                                   (text-mode . "Plain Text")
                                   (sass-mode . "SASS")
-                                  (xml-mode . "XML")))
+                                  (xml-mode . "XML"))
 
 (defcustom refheap-user nil
   "Your RefHeap username."
