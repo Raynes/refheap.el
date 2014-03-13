@@ -134,5 +134,14 @@
   (interactive)
   (refheap-paste-buffer t))
 
+;;;###autoload
+(defun refheap-paste-region-or-buffer (&optional private)
+  "Paste the current region (or buffer, if no region is active) to refheap.
+With prefix arg, paste privately."
+  (interactive "P")
+  (if (use-region-p)
+      (refheap-paste-region (region-beginning) (region-end) private)
+    (refheap-paste-buffer private)))
+
 (provide 'refheap)
 ;;; refheap.el ends here
