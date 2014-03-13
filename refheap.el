@@ -86,9 +86,9 @@
 (defun read-refheap-url (status)
   "Get the url from the refheap server response."
   (search-forward "\n\n")
-  (let ((location (cdr (assoc 'url 
-                       (json-read-from-string 
-                        (buffer-substring (point) 
+  (let ((location (cdr (assoc 'url
+                       (json-read-from-string
+                        (buffer-substring (point)
                                           (point-max)))))))
     (message "Paste created: %s" location)
     (kill-new location)
@@ -103,7 +103,7 @@
          (concat "private=" (if private "true" "false") "&"
                  "language=" (url-hexify-string mode) "&"
                  "contents=" (url-hexify-string text)
-                 (when (and refheap-user refheap-token) 
+                 (when (and refheap-user refheap-token)
                    (concat "&username=" refheap-user "&"
                            "token=" (url-hexify-string refheap-token))))))
     (url-retrieve "https://www.refheap.com/api/paste" 'read-refheap-url)))
