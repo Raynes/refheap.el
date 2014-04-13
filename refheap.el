@@ -73,6 +73,11 @@
                                   (sass-mode . "SASS")
                                   (xml-mode . "XML")))
 
+(defcustom refheap-base-url "https://www.refheap.com"
+  "Your RefHeap URL."
+  :type 'string
+  :group 'refheap)
+
 (defcustom refheap-user nil
   "Your RefHeap username."
   :type 'string
@@ -106,7 +111,7 @@
                  (when (and refheap-user refheap-token)
                    (concat "&username=" refheap-user "&"
                            "token=" (url-hexify-string refheap-token))))))
-    (url-retrieve "https://www.refheap.com/api/paste" 'read-refheap-url)))
+    (url-retrieve (format "%s/api/paste" refheap-base-url) 'read-refheap-url)))
 
 ;;;###autoload
 (defun refheap-paste-region (begin end &optional private)
