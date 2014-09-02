@@ -52,7 +52,7 @@
                                   (haskell-mode . "Haskell")
                                   (tuareg-mode . "OCaml")
                                   (scheme-mode . "Scheme")
-                                  (emacs-lisp-mode . "Scheme")
+                                  (emacs-lisp-mode . "Emacs Lisp")
                                   (r-mode . "R")
                                   (applescript-mode "AppleScript")
                                   (sh-mode . "Bash")
